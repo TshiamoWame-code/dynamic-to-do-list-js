@@ -5,6 +5,22 @@ document.addEventListener('DOMContentLoaded', function () {
   const taskInput = document.getElementById('task-input');
   const taskList = document.getElementById('task-list');
 
+   // Load tasks from Local Storage and display them
+  function loadTasks() {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    storedTasks.forEach(taskText => addTask(taskText, false)); // false to prevent re-saving
+  }
+
+  // Save tasks array to Local Storage
+  function saveTasks(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  // Get current tasks from Local Storage
+  function getStoredTasks() {
+    return JSON.parse(localStorage.getItem('tasks') || '[]');
+  }
+  
   // Function to add a task
   function addTask() {
     // Get and trim the task input
