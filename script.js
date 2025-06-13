@@ -1,7 +1,7 @@
 // Wait for the DOM to fully load before running the script
 document.addEventListener('DOMContentLoaded', function () {
   // Select DOM elements
-  const addButton = document.getElementById('add-task-btn');
+  const addButton = document.getElementById('add-task');
   const taskInput = document.getElementById('task-input');
   const taskList = document.getElementById('task-list');
 
@@ -16,40 +16,35 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // Create list item
+    // Create list item and set its text
     const li = document.createElement('li');
     li.textContent = taskText;
 
     // Create remove button
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove';
-    removeBtn.classList = 'remove-btn';
+    removeBtn.classList.add('remove-btn'); // Use classList.add
 
-    // Remove task when button is clicked
+    // Assign onclick event to remove the task
     removeBtn.onclick = function () {
       taskList.removeChild(li);
     };
 
-    // Append button to list item, and list item to the list
+    // Append remove button to list item and list item to task list
     li.appendChild(removeBtn);
     taskList.appendChild(li);
 
-    // Clear input field
+    // Clear the input field
     taskInput.value = '';
   }
 
   // Event listener for add button
   addButton.addEventListener('click', addTask);
 
-  // Event listener for pressing Enter key
+  // Allow pressing Enter to add task
   taskInput.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
       addTask();
     }
   });
-
-  // (Optional but per your instruction) Call addTask on DOM load
-  // This is only useful if you want to auto-add something; otherwise, it's not required.
-  // Uncomment if desired:
-  // addTask();
 });
